@@ -4,11 +4,16 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  Skeleton,
   Stack,
   Typography,
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import type { MatchResult } from '../lib/matcher';
+import { useDogImage } from '../lib/useDogImage';
+
+const placeholderImage = (name: string) =>
+  'https://placehold.co/400x260/D4A574/FFFFFF?text=' + encodeURIComponent(name);
 
 interface Props {
   result: MatchResult;
@@ -21,6 +26,9 @@ const RANK_LABELS = ['התאמה ראשונה', 'התאמה שנייה', 'התא
 export default function BreedCard({ result, rank }: Props) {
   const { breed, score, reasons } = result;
   const isWinner = rank === 0;
+  const imageHeight = isWinner ? 260 : 200;
+  const { url, loading } = useDogImage(breed.dogCeoSlug);
+  const displayUrl = url ?? placeholderImage(breed.nameHe);
 
   return (
     <Card
@@ -35,18 +43,24 @@ export default function BreedCard({ result, rank }: Props) {
       }}
     >
       <Box sx={{ position: 'relative' }}>
-        <CardMedia
-          component="img"
-          height={isWinner ? 260 : 200}
-          image={breed.imageUrl}
-          alt={breed.nameHe}
-          sx={{ objectFit: 'cover', bgcolor: '#eee' }}
-          onError={(e) => {
-            (e.target as HTMLImageElement).src =
-              'https://placehold.co/400x260/D4A574/FFFFFF?text=' +
-              encodeURIComponent(breed.nameHe);
-          }}
-        />
+        {loading ? (
+          <Skeleton
+            variant="rectangular"
+            height={imageHeight}
+            animation="wave"
+          />
+        ) : (
+          <CardMedia
+            component="img"
+            height={imageHeight}
+            image={displayUrl}
+            alt={breed.nameHe}
+            sx={{ objectFit: 'cover', bgcolor: '#eee' }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = placeholderImage(breed.nameHe);
+            }}
+          />
+        )}
         <Chip
           label={RANK_LABELS[rank]}
           sx={{

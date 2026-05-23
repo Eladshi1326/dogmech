@@ -17,12 +17,14 @@ export interface Breed {
   hypoallergenic: boolean;
   goodWithDogs: Level;
   noviceFriendly: Level;
-  imageUrl: string;
+  /**
+   * dog.ceo API breed identifier. Format: "breed" or "breed/sub".
+   * Example: "labrador", "retriever/golden", "bulldog/french".
+   * Empty string = no dog.ceo image available, use placeholder.
+   */
+  dogCeoSlug: string;
   description: string;
 }
-
-const img = (file: string) =>
-  `https://upload.wikimedia.org/wikipedia/commons/thumb/${file}`;
 
 export const breeds: Breed[] = [
   {
@@ -32,7 +34,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 4, shedding: 4, trainability: 5, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 2, exerciseHoursPerDay: 2,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 5, noviceFriendly: 5,
-    imageUrl: img('3/3a/Labrador_on_Quantock_%282175262184%29.jpg/400px-Labrador_on_Quantock_%282175262184%29.jpg'),
+    dogCeoSlug: 'labrador',
     description: 'ידידותי, נאמן, מצוין למשפחות. אנרגטי וזקוק לפעילות יומית.',
   },
   {
@@ -42,7 +44,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 4, shedding: 5, trainability: 5, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 3, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 5, noviceFriendly: 5,
-    imageUrl: img('b/bd/Golden_Retriever_Dukedestiny01_drvd.jpg/400px-Golden_Retriever_Dukedestiny01_drvd.jpg'),
+    dogCeoSlug: 'retriever/golden',
     description: 'אחד הכלבים הפופולריים בעולם. סבלני, חכם, אוהב ילדים ומים.',
   },
   {
@@ -52,7 +54,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 1, trainability: 5, kidFriendly: 4,
     spaceNeed: 2, barking: 3, groomingEffort: 5, exerciseHoursPerDay: 1.5,
     lifespanYears: 14, hypoallergenic: true, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('8/8e/Standardpoodle.jpg/400px-Standardpoodle.jpg'),
+    dogCeoSlug: 'poodle/standard',
     description: 'חכם במיוחד, אינו משיר, מתאים לאלרגיים. דורש טיפוח קבוע.',
   },
   {
@@ -62,7 +64,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 2, shedding: 3, trainability: 3, kidFriendly: 4,
     spaceNeed: 1, barking: 1, groomingEffort: 2, exerciseHoursPerDay: 0.75,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 5,
-    imageUrl: img('a/a8/RidersOnTheStorm.jpg/400px-RidersOnTheStorm.jpg'),
+    dogCeoSlug: 'bulldog/french',
     description: 'קטן, רגוע, מעולה לדירה. שקט יחסית, לא דורש פעילות רבה.',
   },
   {
@@ -72,7 +74,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 2, shedding: 3, trainability: 2, kidFriendly: 5,
     spaceNeed: 2, barking: 1, groomingEffort: 2, exerciseHoursPerDay: 0.75,
     lifespanYears: 9, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('3/3a/Bulldog_inglese.jpg/400px-Bulldog_inglese.jpg'),
+    dogCeoSlug: 'bulldog/english',
     description: 'עצלן וחביב, מעולה עם ילדים. רגיש לחום ולפעילות אינטנסיבית.',
   },
   {
@@ -82,7 +84,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 3, trainability: 3, kidFriendly: 5,
     spaceNeed: 3, barking: 5, groomingEffort: 2, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 5, noviceFriendly: 4,
-    imageUrl: img('5/55/Beagle_600.jpg/400px-Beagle_600.jpg'),
+    dogCeoSlug: 'beagle',
     description: 'חברותי, מצוין למשפחות. נובח הרבה ובעל חוש ריח חזק.',
   },
   {
@@ -92,7 +94,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 5, shedding: 5, trainability: 5, kidFriendly: 4,
     spaceNeed: 4, barking: 3, groomingEffort: 3, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 2,
-    imageUrl: img('d/d1/German_Shepherd_-_DSC_0346_%2810096362833%29.jpg/400px-German_Shepherd_-_DSC_0346_%2810096362833%29.jpg'),
+    dogCeoSlug: 'germanshepherd',
     description: 'אינטליגנט, נאמן, ניתן לאילוף לעבודה. דורש בעלים מנוסה ופעילות.',
   },
   {
@@ -102,7 +104,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 4, trainability: 5, kidFriendly: 4,
     spaceNeed: 5, barking: 3, groomingEffort: 3, exerciseHoursPerDay: 2.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 2,
-    imageUrl: img('f/f3/Black_tri_australian_shepherd.jpg/400px-Black_tri_australian_shepherd.jpg'),
+    dogCeoSlug: 'australian/shepherd',
     description: 'אנרגטי במיוחד, חכם, מצוין לבעלי אורח חיים פעיל. לא לדירה.',
   },
   {
@@ -112,7 +114,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 5, shedding: 4, trainability: 5, kidFriendly: 4,
     spaceNeed: 5, barking: 3, groomingEffort: 3, exerciseHoursPerDay: 3,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 1,
-    imageUrl: img('1/1f/Bordercollie7.jpg/400px-Bordercollie7.jpg'),
+    dogCeoSlug: 'collie/border',
     description: 'הכלב הכי חכם בעולם. צריך גירוי מנטלי ופיזי כל היום.',
   },
   {
@@ -122,7 +124,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 5, trainability: 2, kidFriendly: 4,
     spaceNeed: 5, barking: 2, groomingEffort: 3, exerciseHoursPerDay: 2.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 1,
-    imageUrl: img('a/a3/Black-Magic-Big-Boy.jpg/400px-Black-Magic-Big-Boy.jpg'),
+    dogCeoSlug: 'husky',
     description: 'יפהפה, עצמאי, אוהב לרוץ. עלול לברוח, קשה לאילוף, משיר הרבה.',
   },
   {
@@ -132,7 +134,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 4, shedding: 5, trainability: 3, kidFriendly: 4,
     spaceNeed: 5, barking: 2, groomingEffort: 4, exerciseHoursPerDay: 2.5,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 1,
-    imageUrl: img('3/3a/Alaskan_Malamute_600.jpg/400px-Alaskan_Malamute_600.jpg'),
+    dogCeoSlug: 'malamute',
     description: 'כלב משא חזק, רגיל לקור. דורש מרחב גדול וטיפוח כבד.',
   },
   {
@@ -142,7 +144,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 3, shedding: 3, trainability: 4, kidFriendly: 2,
     spaceNeed: 4, barking: 2, groomingEffort: 2, exerciseHoursPerDay: 1.5,
     lifespanYears: 10, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 1,
-    imageUrl: img('4/4e/Rottweiler_standing_facing_left.jpg/400px-Rottweiler_standing_facing_left.jpg'),
+    dogCeoSlug: 'rottweiler',
     description: 'כלב שמירה חזק ונאמן. דורש בעלים מנוסה וחינוך עקבי.',
   },
   {
@@ -152,7 +154,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 5, shedding: 3, trainability: 5, kidFriendly: 3,
     spaceNeed: 4, barking: 3, groomingEffort: 1, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 2,
-    imageUrl: img('5/5b/Doberman_Pinscher_-_walking_at_the_park.jpg/400px-Doberman_Pinscher_-_walking_at_the_park.jpg'),
+    dogCeoSlug: 'doberman',
     description: 'אצילי, אינטליגנט, מצוין לשמירה. דורש בעלים שיודע להוביל.',
   },
   {
@@ -162,7 +164,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 3, trainability: 4, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 1, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 3,
-    imageUrl: img('8/87/Boxer_female_brindle.jpg/400px-Boxer_female_brindle.jpg'),
+    dogCeoSlug: 'boxer',
     description: 'משחקי, נאמן, מצוין עם ילדים. צריך פעילות יומית רבה.',
   },
   {
@@ -172,7 +174,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 3, shedding: 3, trainability: 4, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 2, exerciseHoursPerDay: 1.5,
     lifespanYears: 8, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('5/53/Great_Dane_-_Tony_Alter.jpg/400px-Great_Dane_-_Tony_Alter.jpg'),
+    dogCeoSlug: 'dane/great',
     description: 'ענק רגוע ועדין. למרות גודלו - נחמד וסבלני.',
   },
   {
@@ -182,7 +184,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 2, shedding: 4, trainability: 3, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 3, exerciseHoursPerDay: 1.5,
     lifespanYears: 9, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('e/e8/Saint_Bernard_Puppy.jpg/400px-Saint_Bernard_Puppy.jpg'),
+    dogCeoSlug: 'stbernard',
     description: 'ענק עדין, סבלן ואוהב. מתאים למשפחות גדולות עם מקום.',
   },
   {
@@ -192,7 +194,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 2, shedding: 5, trainability: 4, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 4, exerciseHoursPerDay: 1.5,
     lifespanYears: 9, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('c/cd/Newfoundlandhund.jpg/400px-Newfoundlandhund.jpg'),
+    dogCeoSlug: 'newfoundland',
     description: 'ענק שוחה ומציל. עדין במיוחד, מצוין למשפחות עם ילדים.',
   },
   {
@@ -202,7 +204,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 3, shedding: 4, trainability: 4, kidFriendly: 5,
     spaceNeed: 4, barking: 2, groomingEffort: 4, exerciseHoursPerDay: 1.5,
     lifespanYears: 8, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('6/6c/Bernse_Mountain_Dog_600.jpg/400px-Bernse_Mountain_Dog_600.jpg'),
+    dogCeoSlug: 'mountain/bernese',
     description: 'גדול, יפה וחיבוקי. מתאים למזג אוויר קר ולמשפחות.',
   },
   {
@@ -212,7 +214,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 4, shedding: 5, trainability: 3, kidFriendly: 5,
     spaceNeed: 4, barking: 4, groomingEffort: 5, exerciseHoursPerDay: 2,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('5/5a/Samoyed_600.jpg/400px-Samoyed_600.jpg'),
+    dogCeoSlug: 'samoyed',
     description: '"כלב המחייך". פרוותי לבן ויפה, חברותי, צריך טיפוח רב.',
   },
   {
@@ -222,7 +224,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 2, shedding: 4, trainability: 2, kidFriendly: 2,
     spaceNeed: 3, barking: 2, groomingEffort: 4, exerciseHoursPerDay: 1,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 1,
-    imageUrl: img('5/5e/Chow_Chow_portrait.jpg/400px-Chow_Chow_portrait.jpg'),
+    dogCeoSlug: 'chow',
     description: 'עצמאי וקצת חתולי באופיו. לא חביב על זרים, דורש בעלים מנוסה.',
   },
   {
@@ -232,7 +234,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 4, trainability: 2, kidFriendly: 3,
     spaceNeed: 2, barking: 2, groomingEffort: 2, exerciseHoursPerDay: 1.5,
     lifespanYears: 14, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 2,
-    imageUrl: img('1/14/Taka_Shiba.jpg/400px-Taka_Shiba.jpg'),
+    dogCeoSlug: 'shiba',
     description: 'יפני עצמאי וחכם. גאה וקצת עיקש, מתאים לבעלים מנוסים.',
   },
   {
@@ -242,7 +244,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 3, shedding: 4, trainability: 3, kidFriendly: 2,
     spaceNeed: 4, barking: 2, groomingEffort: 3, exerciseHoursPerDay: 1.5,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 1, noviceFriendly: 1,
-    imageUrl: img('a/a7/Akita_inu.jpeg/400px-Akita_inu.jpeg'),
+    dogCeoSlug: 'akita',
     description: 'כלב סמוראי נאמן. מרשים, עצמאי, לא מתאים למתחילים.',
   },
   {
@@ -252,7 +254,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 4, trainability: 3, kidFriendly: 3,
     spaceNeed: 4, barking: 3, groomingEffort: 2, exerciseHoursPerDay: 2.5,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 2,
-    imageUrl: img('f/f0/Dalmatian_b_01.jpg/400px-Dalmatian_b_01.jpg'),
+    dogCeoSlug: 'dalmatian',
     description: 'אנרגטי במיוחד, צריך הרבה ריצה. נאמן אך דורש פעילות רבה.',
   },
   {
@@ -262,7 +264,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 2, trainability: 4, kidFriendly: 4,
     spaceNeed: 4, barking: 3, groomingEffort: 1, exerciseHoursPerDay: 2.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('3/3e/Vizsla_portrait.jpg/400px-Vizsla_portrait.jpg'),
+    dogCeoSlug: 'vizsla',
     description: 'הונגרי אצילי, "כלב הוולקרו" - לא עוזב את בעליו. אנרגטי מאוד.',
   },
   {
@@ -272,7 +274,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 3, trainability: 4, kidFriendly: 3,
     spaceNeed: 4, barking: 3, groomingEffort: 1, exerciseHoursPerDay: 2.5,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 2,
-    imageUrl: img('8/8d/Weimaraner_wb.jpg/400px-Weimaraner_wb.jpg'),
+    dogCeoSlug: 'weimaraner',
     description: 'אפור-כסוף יפהפה, ציד מצוין. דורש פעילות אינטנסיבית.',
   },
   {
@@ -282,7 +284,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 5, shedding: 3, trainability: 4, kidFriendly: 4,
     spaceNeed: 4, barking: 3, groomingEffort: 1, exerciseHoursPerDay: 2.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 3,
-    imageUrl: img('7/77/German_Shorthaired_Pointer.jpg/400px-German_Shorthaired_Pointer.jpg'),
+    dogCeoSlug: 'pointer/german',
     description: 'אתלט אמיתי, רב-תכליתי. מתאים לרצים ומטיילים.',
   },
   {
@@ -292,7 +294,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 3, trainability: 4, kidFriendly: 5,
     spaceNeed: 3, barking: 3, groomingEffort: 3, exerciseHoursPerDay: 2,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('6/66/English_Springer_Spaniel_-_Tarka.jpg/400px-English_Springer_Spaniel_-_Tarka.jpg'),
+    dogCeoSlug: 'springer/english',
     description: 'אוהב משפחה, אנרגטי ושמח. מצוין למשפחות פעילות.',
   },
   {
@@ -302,7 +304,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 3, trainability: 4, kidFriendly: 5,
     spaceNeed: 2, barking: 3, groomingEffort: 4, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('b/bf/Black_American_Cocker_Spaniel.jpg/400px-Black_American_Cocker_Spaniel.jpg'),
+    dogCeoSlug: 'spaniel/cocker',
     description: 'חמוד וחביב, מתאים גם לדירה. דורש טיפוח של הפרווה.',
   },
   {
@@ -312,7 +314,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 2, shedding: 3, trainability: 4, kidFriendly: 5,
     spaceNeed: 1, barking: 2, groomingEffort: 3, exerciseHoursPerDay: 1,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 5, noviceFriendly: 5,
-    imageUrl: img('c/cf/CavalierKingCharlesSpaniel1.JPG/400px-CavalierKingCharlesSpaniel1.JPG'),
+    dogCeoSlug: 'spaniel/blenheim',
     description: 'מלכותי, רגוע, מצוין לדירה ולמשפחות. ידידותי לכולם.',
   },
   {
@@ -322,7 +324,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 3, shedding: 1, trainability: 3, kidFriendly: 3,
     spaceNeed: 1, barking: 4, groomingEffort: 5, exerciseHoursPerDay: 0.75,
     lifespanYears: 13, hypoallergenic: true, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('a/ab/Maltese_600.jpg/400px-Maltese_600.jpg'),
+    dogCeoSlug: 'maltese',
     description: 'לבנבן קטן ועדין, היפואלרגני. דורש תספורת קבועה.',
   },
   {
@@ -332,7 +334,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 1, trainability: 4, kidFriendly: 5,
     spaceNeed: 1, barking: 3, groomingEffort: 5, exerciseHoursPerDay: 1,
     lifespanYears: 14, hypoallergenic: true, goodWithDogs: 4, noviceFriendly: 5,
-    imageUrl: img('1/15/Just_chillin%27_%282604643020%29.jpg/400px-Just_chillin%27_%282604643020%29.jpg'),
+    dogCeoSlug: 'bichon/frise',
     description: 'פלאפי לבן ושמח. היפואלרגני, מצוין למשפחות.',
   },
   {
@@ -342,7 +344,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 3, shedding: 1, trainability: 3, kidFriendly: 2,
     spaceNeed: 1, barking: 4, groomingEffort: 5, exerciseHoursPerDay: 0.5,
     lifespanYears: 14, hypoallergenic: true, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('e/ea/Yorkshire_Terrier_Champion.jpg/400px-Yorkshire_Terrier_Champion.jpg'),
+    dogCeoSlug: 'terrier/yorkshire',
     description: 'זעיר וחצוף, היפואלרגני. לא הכי טוב עם ילדים קטנים.',
   },
   {
@@ -352,7 +354,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 2, shedding: 1, trainability: 3, kidFriendly: 4,
     spaceNeed: 1, barking: 2, groomingEffort: 5, exerciseHoursPerDay: 0.5,
     lifespanYears: 13, hypoallergenic: true, goodWithDogs: 4, noviceFriendly: 5,
-    imageUrl: img('6/66/ShihTzuFalcao.jpg/400px-ShihTzuFalcao.jpg'),
+    dogCeoSlug: 'shihtzu',
     description: 'מלכותי קטן, רגוע. מצוין לדירה, היפואלרגני, חובב חיבוקים.',
   },
   {
@@ -362,7 +364,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 2, shedding: 4, trainability: 3, kidFriendly: 5,
     spaceNeed: 1, barking: 2, groomingEffort: 2, exerciseHoursPerDay: 0.75,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 5,
-    imageUrl: img('e/ee/Mops_oct09_%282%29.jpg/400px-Mops_oct09_%282%29.jpg'),
+    dogCeoSlug: 'pug',
     description: 'מצחיק ועצלן, אוהב לישון על הספה. מצוין לדירה ולמשפחות.',
   },
   {
@@ -372,7 +374,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 2, shedding: 3, trainability: 2, kidFriendly: 2,
     spaceNeed: 1, barking: 3, groomingEffort: 4, exerciseHoursPerDay: 0.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 3,
-    imageUrl: img('0/05/PekineseRuede.jpg/400px-PekineseRuede.jpg'),
+    dogCeoSlug: 'pekinese',
     description: 'אצילי וגאה, מתאים לאדם בודד או לזוג. לא ממש לילדים.',
   },
   {
@@ -382,7 +384,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 3, shedding: 2, trainability: 2, kidFriendly: 2,
     spaceNeed: 1, barking: 5, groomingEffort: 1, exerciseHoursPerDay: 0.5,
     lifespanYears: 15, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 4,
-    imageUrl: img('e/e0/Chihuahua_portrait.jpg/400px-Chihuahua_portrait.jpg'),
+    dogCeoSlug: 'chihuahua',
     description: 'הכלב הכי קטן בעולם, אישיות ענקית. מתאים לאדם בודד, נובח הרבה.',
   },
   {
@@ -392,7 +394,7 @@ export const breeds: Breed[] = [
     size: 1, energy: 4, shedding: 2, trainability: 5, kidFriendly: 3,
     spaceNeed: 1, barking: 3, groomingEffort: 2, exerciseHoursPerDay: 1,
     lifespanYears: 15, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('a/a0/Papillon_600.jpg/400px-Papillon_600.jpg'),
+    dogCeoSlug: 'papillon',
     description: 'קטן וחכם במיוחד, אוזניים כפרפר. מצוין לאילוף ולתחרויות.',
   },
   {
@@ -402,7 +404,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 5, shedding: 3, trainability: 3, kidFriendly: 3,
     spaceNeed: 2, barking: 4, groomingEffort: 1, exerciseHoursPerDay: 2,
     lifespanYears: 14, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 2,
-    imageUrl: img('1/18/Jack_Russell_Terrier_1.jpg/400px-Jack_Russell_Terrier_1.jpg'),
+    dogCeoSlug: 'terrier/russell',
     description: 'אנרגיה בלתי נדלית בגוף קטן. ציד אמיתי, צריך הרבה פעילות.',
   },
   {
@@ -412,7 +414,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 2, trainability: 3, kidFriendly: 4,
     spaceNeed: 2, barking: 4, groomingEffort: 3, exerciseHoursPerDay: 1,
     lifespanYears: 13, hypoallergenic: true, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('0/06/West_Highland_White_Terrier_Krakow.jpg/400px-West_Highland_White_Terrier_Krakow.jpg'),
+    dogCeoSlug: 'terrier/westhighland',
     description: 'לבן קטן ועליז, היפואלרגני. מצוין לדירה, לא נושר.',
   },
   {
@@ -422,7 +424,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 2, trainability: 3, kidFriendly: 3,
     spaceNeed: 2, barking: 3, groomingEffort: 3, exerciseHoursPerDay: 1,
     lifespanYears: 12, hypoallergenic: true, goodWithDogs: 2, noviceFriendly: 3,
-    imageUrl: img('e/eb/Scottish_Terrier_600.jpg/400px-Scottish_Terrier_600.jpg'),
+    dogCeoSlug: 'terrier/scottish',
     description: 'עצמאי ומכובד, היפואלרגני. דורש טיפוח ספציפי.',
   },
   {
@@ -432,7 +434,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 2, trainability: 3, kidFriendly: 3,
     spaceNeed: 3, barking: 2, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 2,
-    imageUrl: img('a/a3/Bullterrier_white_600.jpg/400px-Bullterrier_white_600.jpg'),
+    dogCeoSlug: 'terrier/bull',
     description: 'ראש ביצה ייחודי, אנרגטי ושמח. עיקש לפעמים, צריך אילוף עקבי.',
   },
   {
@@ -442,7 +444,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 2, trainability: 4, kidFriendly: 5,
     spaceNeed: 3, barking: 2, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 3,
-    imageUrl: img('6/66/Staffordshire_Bull_Terrier_600.jpg/400px-Staffordshire_Bull_Terrier_600.jpg'),
+    dogCeoSlug: 'bullterrier/staffordshire',
     description: '"כלב מטפלת" - מצוין עם ילדים. שריר, נאמן, אוהב חיבוקים.',
   },
   {
@@ -452,7 +454,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 4, shedding: 2, trainability: 4, kidFriendly: 4,
     spaceNeed: 3, barking: 2, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 2, noviceFriendly: 2,
-    imageUrl: img('4/44/AmericanStaffordshireTerrier_5.JPG/400px-AmericanStaffordshireTerrier_5.JPG'),
+    dogCeoSlug: 'bullterrier/staffordshire',
     description: 'חזק ונאמן, צריך בעלים בטוח. אוהב את משפחתו בכל הלב.',
   },
   {
@@ -462,7 +464,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 1, trainability: 4, kidFriendly: 4,
     spaceNeed: 2, barking: 4, groomingEffort: 4, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: true, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('9/92/Mini_Schnauzer.jpg/400px-Mini_Schnauzer.jpg'),
+    dogCeoSlug: 'schnauzer/miniature',
     description: 'זקנקן חמוד, היפואלרגני, חכם. מתאים לדירה, נובח.',
   },
   {
@@ -472,7 +474,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 4, shedding: 1, trainability: 5, kidFriendly: 3,
     spaceNeed: 4, barking: 3, groomingEffort: 4, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: true, goodWithDogs: 3, noviceFriendly: 1,
-    imageUrl: img('1/1e/Giant_Schnauzer.jpg/400px-Giant_Schnauzer.jpg'),
+    dogCeoSlug: 'schnauzer/giant',
     description: 'גדול ומרשים, היפואלרגני. דורש בעלים מנוסה ופעילות רבה.',
   },
   {
@@ -482,7 +484,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 3, shedding: 2, trainability: 3, kidFriendly: 3,
     spaceNeed: 1, barking: 4, groomingEffort: 2, exerciseHoursPerDay: 1,
     lifespanYears: 14, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 4,
-    imageUrl: img('b/b6/Short-haired-Dachshund.jpg/400px-Short-haired-Dachshund.jpg'),
+    dogCeoSlug: 'dachshund',
     description: '"כלב נקניקייה" - קטן, אמיץ ונובח. מצוין לדירה, חשוב להישמר על הגב.',
   },
   {
@@ -492,7 +494,7 @@ export const breeds: Breed[] = [
     size: 2, energy: 4, shedding: 5, trainability: 4, kidFriendly: 4,
     spaceNeed: 2, barking: 3, groomingEffort: 2, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('c/cd/Welsh_Pembroke_Corgi.jpg/400px-Welsh_Pembroke_Corgi.jpg'),
+    dogCeoSlug: 'cardigan',
     description: 'רגליים קצרות, אישיות גדולה. חכם, רועה, מתאים לדירה גדולה.',
   },
   {
@@ -502,7 +504,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 2, shedding: 4, trainability: 2, kidFriendly: 5,
     spaceNeed: 2, barking: 3, groomingEffort: 2, exerciseHoursPerDay: 1,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('8/8e/Basset_Hound_600.jpg/400px-Basset_Hound_600.jpg'),
+    dogCeoSlug: 'hound/basset',
     description: 'אוזניים ארוכות, אישיות עצלנית וחביבה. אוהב לרחרח.',
   },
   {
@@ -512,7 +514,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 2, trainability: 3, kidFriendly: 4,
     spaceNeed: 3, barking: 1, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 13, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('c/cd/Whippet-tan-white.jpg/400px-Whippet-tan-white.jpg'),
+    dogCeoSlug: 'whippet',
     description: 'רץ מהיר אבל בבית - תפוח אדמה. שקט, מצוין לדירה, אוהב לישון.',
   },
   {
@@ -522,7 +524,7 @@ export const breeds: Breed[] = [
     size: 4, energy: 3, shedding: 2, trainability: 3, kidFriendly: 4,
     spaceNeed: 3, barking: 1, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 12, hypoallergenic: false, goodWithDogs: 4, noviceFriendly: 4,
-    imageUrl: img('d/d5/Greyhound_Racing_2_amk.jpg/400px-Greyhound_Racing_2_amk.jpg'),
+    dogCeoSlug: 'greyhound/italian',
     description: 'אצן עולמי, אבל בבית - רגוע ומחבב נמנום. עדין ושקט.',
   },
   {
@@ -532,7 +534,7 @@ export const breeds: Breed[] = [
     size: 5, energy: 4, shedding: 2, trainability: 3, kidFriendly: 4,
     spaceNeed: 4, barking: 2, groomingEffort: 1, exerciseHoursPerDay: 2,
     lifespanYears: 11, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 2,
-    imageUrl: img('4/44/Ridge_Vio.jpg/400px-Ridge_Vio.jpg'),
+    dogCeoSlug: 'ridgeback/rhodesian',
     description: 'אפריקאי גאה ועצמאי. כלב ציד ליונים במקור, דורש בעלים מנוסה.',
   },
   {
@@ -542,7 +544,7 @@ export const breeds: Breed[] = [
     size: 3, energy: 4, shedding: 3, trainability: 3, kidFriendly: 3,
     spaceNeed: 3, barking: 4, groomingEffort: 1, exerciseHoursPerDay: 1.5,
     lifespanYears: 14, hypoallergenic: false, goodWithDogs: 3, noviceFriendly: 3,
-    imageUrl: img('c/c9/Canaan_Dog.jpg/400px-Canaan_Dog.jpg'),
+    dogCeoSlug: '',
     description: 'הכלב הלאומי של ישראל. עצמאי, חכם, מסתגל לחום מקומי.',
   },
 ];
