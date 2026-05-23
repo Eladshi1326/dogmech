@@ -33,22 +33,36 @@ export default function Quiz({ onComplete, onBackToLanding }: Props) {
 
   const progress = ((safeIndex + 1) / visibleQuestions.length) * 100;
 
+  const advance = (committedAnswers: AnswerMap) => {
+    const newVisible = getVisibleQuestions(committedAnswers);
+    const nextIdx = safeIndex + 1;
+    if (nextIdx >= newVisible.length) {
+      onComplete(committedAnswers);
+    } else {
+      setIndex(nextIdx);
+    }
+  };
+
   const handleAnswer = (value: AnswerValue) => {
-    setAnswers((prev) => ({ ...prev, [currentQuestion.id]: value }));
+    const newAnswers = { ...answers, [currentQuestion.id]: value };
+    setAnswers(newAnswers);
+    if (currentQuestion.type === 'single') {
+      // Short delay so the user sees their selection highlight before transitioning.
+      window.setTimeout(() => advance(newAnswers), 250);
+    }
   };
 
   const handleNext = () => {
+    let committed = answers;
     if (currentQuestion.type === 'slider' && currentAnswer === undefined) {
-      setAnswers((prev) => ({
-        ...prev,
-        [currentQuestion.id]: currentQuestion.defaultValue ?? currentQuestion.min ?? 0,
-      }));
+      committed = {
+        ...answers,
+        [currentQuestion.id]:
+          currentQuestion.defaultValue ?? currentQuestion.min ?? 0,
+      };
+      setAnswers(committed);
     }
-    if (isLast) {
-      onComplete(answers);
-    } else {
-      setIndex(safeIndex + 1);
-    }
+    advance(committed);
   };
 
   const handleBack = () => {
