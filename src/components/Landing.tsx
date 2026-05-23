@@ -29,11 +29,11 @@ export default function Landing({ onStart }: Props) {
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600 }}>
           ענה על שאלון קצר ונחשב עבורך אילו גזעי כלבים הכי מתאימים לאורח החיים,
-          לבית ולמשפחה שלך - לפי אלגוריתם מדויק על מאגר של מעל 50 גזעים.
+          לבית ולמשפחה שלך - לפי אלגוריתם מדויק על מאגר של מעל 100 גזעים.
         </Typography>
         <Stack direction="row" spacing={3} sx={{ pt: 2 }}>
           <Feature emoji="🎯" label="10 שאלות חכמות" />
-          <Feature emoji="🐕" label="50+ גזעים" />
+          <Feature emoji="🐕" label="100+ גזעים" />
           <Feature emoji="⚡" label="תוצאות מיידיות" />
         </Stack>
         <Button
